@@ -72,13 +72,17 @@
 
 (define target-dc (send target-canvas get-dc))
 
-(define message-panel (new horizontal-panel% (parent frame)))
+(define message-panel (new horizontal-panel%
+                           (parent frame)
+                           (stretchable-height #f)))
 
 (define message (new message%
                      (parent message-panel)
                      (label "")))
 
-(define control-panel (new horizontal-panel% (parent frame)))
+(define control-panel (new horizontal-panel%
+                           (parent frame)
+                           (stretchable-height #f)))
 
 (define text-sound
   (new text-field%
@@ -92,11 +96,12 @@
        (callback
          (lambda (button event)
            (if (valid-files?)
-               ((send message set-label "Please wait...")
-               (if (attempt-create)
-                   (message-box "Done" "Video created.")
-                   (message-box "Error" "Something went wrong."))
-               (send message set-label ""))
+               (
+                 (send message set-label "Please wait...")
+                 (if (attempt-create)
+                     (message-box "Done" "Video created.")
+                     (message-box "Error" "Something went wrong."))
+                 (send message set-label ""))
                (message-box "Bad Input"
                             "Need to select image and sound file."))))))
 
