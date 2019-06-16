@@ -96,7 +96,7 @@
        (callback
          (lambda (button event)
            (if (valid-files?)
-               (
+               (begin
                  (send message set-label "Please wait...")
                  (if (attempt-create)
                      (message-box "Done" "Video created.")
